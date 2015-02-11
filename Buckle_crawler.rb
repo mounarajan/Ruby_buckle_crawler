@@ -155,7 +155,7 @@ class ContentExtraction < Pagextraction
   results_level_array = features_blob_level_hash
   products["results"] = results_level_hash
   products["results"]["offers"] = offers_level_hash
-  products["results"]["features_blob"] = features_blob_level_hash
+  products["results"]["features"] = features_blob_level_hash
   File.open("buckle_prod.txt", 'r') do |prod_cat|
         prod_pag_count = 0
         File.open("buckle_products.json", 'a+') do |putss|
@@ -193,6 +193,10 @@ class ContentExtraction < Pagextraction
                   results_level_hash["list_price"] = ext_con.scan(/was[^<]*<span[^\$]*\$[^>]*>(.*?)<\/span/)
                   #List price currency
                   results_level_hash["list_price_currency"] = "USD"
+                  #Features_blob should be an array
+                  features_blob = ext_con.scan(/tab\-pane">(.*?)<\/ul><\/div/)[0][0]
+                  fi = features_blob.scan(/<li>([^<]*)</)
+                  features_blob_level_hash["features_blob"] = fi
                   #Price
                   offers_level_hash["price"] = ext_con.scan(/price\:amount\"\scontent="([^\"]*)\"/)
                   #Currency
