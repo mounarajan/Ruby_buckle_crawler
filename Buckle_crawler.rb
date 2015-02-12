@@ -216,7 +216,7 @@ end
 
 page_con = ContentExtraction.new
 page_con.httparty("http://www.buckle.com/siteindex.jsp")
-puts page_con.page_content.scan(/<TITLE>(.*?)<\/title/i) 
+#puts page_con.page_content.scan(/<TITLE>(.*?)<\/title/i) 
 page_con.category_pages
 page_con.pagination_pages(60)
 page_con.product_pages(60)
